@@ -13,7 +13,7 @@ class QuartoCreateSchema(BaseModel):
     numero: int = 101
     capacidade_maxima: int = 2
     valor_diaria: float = 400
-    vago: bool = 1
+    vago: bool = True
 
     @validator('capacidade_maxima')
     def check_capacidade_maxima(cls, value):
@@ -59,7 +59,7 @@ class QuartoEditSchema(BaseModel):
     numero: int = 101
     capacidade_maxima: int = 2
     valor_diaria: float = 400
-    vago: bool = 1
+    vago: bool = False
 
     @validator('capacidade_maxima')
     def check_capacidade_maxima(cls, value):
@@ -79,14 +79,6 @@ class QuartoEditSchema(BaseModel):
     def check_vago(cls, value):
         if not isinstance(value, bool):
             raise ValueError("O campo 'vago' deve ser um booleano (True ou False)")
-        return value
-    
-    @validator('numero')
-    def check_numero(cls, value):
-        if value < 1 or value > 5000:
-            raise ValueError("O número do quarto deve estar entre 1 e 5000")
-        if Quarto.query.filter_by(numero=value).first():
-            raise ValueError("O número do quarto já está em uso")
         return value
     
 class QuartoViewSchema(BaseModel):

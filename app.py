@@ -65,14 +65,12 @@ def editar_quarto(query: QuartoBuscaPorIDSchema, form: QuartoEditSchema):
     """
     print(form)
     quarto_id = int(query.id)
-    
+
     quarto = {
-        'numero': form.numero,
         'capacidade_maxima': form.capacidade_maxima,
         'valor_diaria': form.valor_diaria,
-        'vago': form.vago,
     }
-   
+
     db.session.query(Quarto).filter(Quarto.id == quarto_id).update(quarto)
     db.session.commit()
 
