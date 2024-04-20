@@ -37,6 +37,7 @@ class Reserva(db.Model):
             raise ValueError("A reserva não pode ter um cliente desconhecido")
         
         return {
+            'id':self.id,
             'quarto_id': self.quarto_id,
             'numero_quarto': self.quarto.numero,
             'data_checkin': self.data_checkin.isoformat(),
